@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "NRdbOJLALCJyIq+hleIcIwnrjly4IiqRrHI8vKpeYso=",
+  "Hash": "ga+PFs1Vg/b5uNuD8ycbSkNnu5lrK6ipDFIslLxoQso=",
   "Source": "intelliBot",
   "BasePath": "_content/intelliBot",
   "Mode": "Default",
@@ -110,25 +110,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\microphone-button.css"
-    },
-    {
-      "Identity": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\css\\review-form.css",
-      "SourceId": "intelliBot",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\",
-      "BasePath": "_content/intelliBot",
-      "RelativePath": "css/review-form.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\review-form.css"
     },
     {
       "Identity": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\css\\review.css",
@@ -1592,6 +1573,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\resources\\intelliguide_logo_white.png"
+    },
+    {
+      "Identity": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\resources\\pedro.gif",
+      "SourceId": "intelliBot",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\",
+      "BasePath": "_content/intelliBot",
+      "RelativePath": "resources/pedro.gif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\resources\\pedro.gif"
     },
     {
       "Identity": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\resources\\robotje2.png",

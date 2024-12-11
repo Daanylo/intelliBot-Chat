@@ -142,24 +142,9 @@ const displayAnswer = (answer) => {
     container.scrollTop = container.scrollHeight;
 }
 
-document.querySelector(".finish-conversation").addEventListener('click', () => {
-    startAnimation();
+document.getElementById("finish-conversation").addEventListener('click', () => {
+    window.location.href = '/Home/Review';
 });
-
-const startAnimation = () => {
-    const overlay = document.querySelector('.overlay.start');
-    if (overlay) {
-        overlay.classList.add('animate');
-        setTimeout(() => {
-            overlay.classList.remove('animate');
-        }, 5000);
-        setTimeout(() => {
-            window.location.href = '/Home/Review';
-        }, 2000);
-    } else {
-        console.error('Overlay element not found');
-    }
-};
 
 function startMicrophoneVisualization() {
     const element = document.querySelector('.microphone-button');

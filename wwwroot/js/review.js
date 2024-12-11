@@ -1,50 +1,46 @@
-window.addEventListener("DOMContentLoaded",() => {
-	const fr = new FaceRating("#face-rating");
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('review-form');
+    const closeButton = document.getElementById('close-grattitude');
+
+    closeButton.addEventListener('click', navigateHome);
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const selectedRadio = document.querySelector('input[name="feedback"]:checked');
+        const feedbackValue = selectedRadio ? selectedRadio.value : null;
+
+        const reviewText = document.getElementById('review-text').value;
+
+        console.log('Feedback Value:', feedbackValue);
+        console.log('Review Text:', reviewText);
+
+        showGrattitude();
+
+        fetch('/Home/ProcessReview', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ feedback: feedbackValue, review: reviewText })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    });
 });
 
-class FaceRating {
-	constructor(qs) {
-		this.input = document.querySelector(qs);
-		this.input?.addEventListener("input",this.update.bind(this));
-		this.face = this.input?.previousElementSibling;
-		this.update();
-	}
-	update(e) {
-		let value = this.input.defaultValue;
+const showGrattitude = () => {
+    const grattitudeContainer = document.getElementById('grattitude-container');
+    const reviewContainer = document.getElementById('review-container');
+    reviewContainer.style.display = 'none';
+    grattitudeContainer.style.display = 'flex';
+};
 
-		// when manually set
-		if (e) value = e.target?.value;
-		// when initiated
-		else this.input.value = value;
-
-		const min = this.input.min || 0;
-		const max = this.input.max || 100;
-		const percentRaw = (value - min) / (max - min) * 100;
-		const percent = +percentRaw.toFixed(2);
-
-		this.input?.style.setProperty("--percent",`${percent}%`);
-
-		// emotions
-		const duration = 1;
-		const delay = -(duration * 0.99) * percent / 100;
-		const parts = ["right","left","mouth-lower","mouth-upper"];
-
-		parts.forEach(p => {
-			const el = this.face?.querySelector(`[data-${p}]`);
-			el?.style.setProperty(`--delay-${p}`,`${delay}s`);
-		});
-
-		// aria label
-		const faces = [
-			"Sad face",
-			"Slightly sad face",
-			"Straight face",
-			"Slightly happy face",
-			"Happy face"
-		];
-		let faceIndex = Math.floor(faces.length * percent / 100);
-		if (faceIndex === faces.length) --faceIndex;
-
-		this.face?.setAttribute("aria-label",faces[faceIndex]);
-	}
-}
+const navigateHome = () => {
+    window.location.href = '/Home/Index';
+};

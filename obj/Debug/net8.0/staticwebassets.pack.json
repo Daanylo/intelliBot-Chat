@@ -17,10 +17,6 @@
       "PackagePath": "staticwebassets\\css\\microphone-button.css"
     },
     {
-      "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\css\\review-form.css",
-      "PackagePath": "staticwebassets\\css\\review-form.css"
-    },
-    {
       "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\css\\review.css",
       "PackagePath": "staticwebassets\\css\\review.css"
     },
@@ -327,6 +323,10 @@
     {
       "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\resources\\intelliguide_logo_white.png",
       "PackagePath": "staticwebassets\\resources\\intelliguide_logo_white.png"
+    },
+    {
+      "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\resources\\pedro.gif",
+      "PackagePath": "staticwebassets\\resources\\pedro.gif"
     },
     {
       "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\resources\\robotje2.png",

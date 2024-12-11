@@ -1,52 +1,4 @@
-﻿.overlay {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(150deg, #209bff 0%, #0028da 100%);
-    z-index: 20;
-    overflow: hidden;
-}
-
-.overlay.end {
-    right: 0;
-    animation: slide-over-end 1s cubic-bezier(0.75, 0, 0.25, 1) forwards;
-    width: 100vw;
-}
-
-.overlay.start {
-    left: 0;
-    width: 0vw;
-}
-
-.overlay.start.animate {
-    animation: slide-over-start 1s cubic-bezier(0.75, 0, 0.25, 1) forwards;
-}
-
-.overlay img {
-    width: 500px;
-}
-
-@keyframes slide-over-start {
-    0% {
-        width: 0vw;
-    }
-
-    100% {
-        width: 100vw;
-    }
-}
-
-@keyframes slide-over-end {
-    0% {
-        width: 100vw;
-    }
-
-    100% {
-        width: 0;
-    }
-}
+﻿
 
 .page.conversation {
     padding: 20px;
@@ -60,8 +12,8 @@
 .conversation-wrapper {
     position: relative;
     display: flex;
-    height: 700px;
     flex-direction: column;
+    flex-grow: 1;
 }
 
 .conversation-container {
@@ -115,8 +67,8 @@
 .gui-bar {
     border-radius: 20px 20px 0 0;
     display: flex;
-    align-items: end;
     justify-content: center;
+    align-items: center;
     gap: 50px;
     color: white;
     z-index: 10;
@@ -177,7 +129,38 @@
 }
 
 .microphone-button.active {
-    background: linear-gradient(150deg, #209bff 0%, #0028da 100%);
+    background: radial-gradient( 100% 100% at 100% 0%, #89E5FF 0%, #5468FF 100% );
+    animation: animate-gradient 10s linear infinite, hue-rotate 10s linear infinite; /* Apply both animations */
+}
+
+@keyframes animate-gradient {
+    0% {
+        background-position: 0% 0%;
+    }
+    25% {
+        background-position: 100% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    75% {
+        background-position: 0% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+@keyframes hue-rotate {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+    50% {
+        filter: hue-rotate(15deg);
+    }
+    100% {
+        filter: hue-rotate(0deg);
+    }
 }
 
 .fade-overlay {
@@ -190,23 +173,10 @@
     height: 100%;
 }
 
-.finish-conversation {
+#finish-conversation {
     position: absolute;
     color: white;
-    display: flex;
-    padding: 20px;
-    gap: 20px;
-    border-radius: 20px;
     right: 0;
     bottom: 0;
     margin: 20px;
-    background: linear-gradient(150deg, #209bff 0%, #0028da 100%);
-}
-
-.finish-conversation i {
-    font-size: 3em;
-}
-
-.finish-conversation:hover {
-    cursor: pointer;
 }

@@ -22,24 +22,15 @@
             return text ? JSON.parse(text) : {};
         })
         .then(data => {
-            console.log('Success:', data);
-            startAnimation();
+            setTimeout(() => {
+            window.location.href = '/Home/Conversation';
+            }, 2000);
         })
         .catch((error) => {
             console.error('Error:', error);
         });
     });
 });
-
-const startAnimation = () => {
-    document.querySelector('.overlay').classList.add('animate');
-    setTimeout(() => {
-        document.querySelector('.overlay').classList.remove('animate');
-    }, 5000);
-    setTimeout(() => {
-        window.location.href = '/Home/Conversation';
-    }, 2000);
-}
 
 document.addEventListener('DOMContentLoaded', () => {
     const audio = document.getElementById('audio');

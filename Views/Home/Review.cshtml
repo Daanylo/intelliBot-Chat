@@ -4,6 +4,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,11 +12,13 @@
     <link rel="icon" type="image/x-icon" href="~/resources/intelliguide_icon.ico">
     <script src="~/js/review.js" defer></script>
     <link rel="stylesheet" href="~/css/review.css">
-    <link rel="stylesheet" href="~/css/review-form.css">
     <link rel="stylesheet" href="~/css/styles.css">
     <link rel="stylesheet" href="https://use.typekit.net/biq6ldp.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+        integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
     <div class="page-container">
         <div class="navbar">
@@ -28,28 +31,65 @@
             </div>
         </div>
         <div class="content-wrapper">
-            <div class="review-container">
+            <div class="review-container" id="review-container">
                 <div class="text-container">
                     <h1>Help ons</h1>
-                    <p>Wij willen graag weten hoe je de chatbot hebt ervaren. Laat ons weten wat je van de chatbot vindt.</p>
+                    <p>Wij willen graag weten hoe je de chatbot hebt ervaren. Laat ons weten wat je van de chatbot
+                        vindt.</p>
                 </div>
-                <form class="fr" action="">
-                    <label for="face-rating">Hoe tevreden ben je met de antwoorden die je hebt gekregen?</label>
-                    <div class="fr__face" role="img" aria-label="Straight face">
-                        <div class="fr__face-right-eye" data-right></div>
-                        <div class="fr__face-left-eye" data-left></div>
-                        <div class="fr__face-mouth-lower" data-mouth-lower></div>
-                        <div class="fr__face-mouth-upper" data-mouth-upper></div>
+                <form class="review-form" id="review-form">
+                    <label for="radio">Hoe tevreden ben je over de antwoorden die je hebt gekregen?</label>
+                    <div class="emoji-container">
+                        <div class="item">
+                            <label for="0">
+                                <input class="radio" type="radio" name="feedback" id="0" value="0">
+                                <span>🤬</span>
+                            </label>
+                        </div>
+                        <div class="item">
+                            <label for="1">
+                                <input class="radio" type="radio" name="feedback" id="1" value="1">
+                                <span>🙁</span>
+                            </label>
+                        </div>
+                        <div class="item">
+                            <label for="2">
+                                <input class="radio" type="radio" name="feedback" id="2" value="2">
+                                <span>😶</span>
+                            </label>
+                        </div>
+                        <div class="item">
+                            <label for="3">
+                                <input class="radio" type="radio" name="feedback" id="3" value="3">
+                                <span>😁</span>
+                            </label>
+                        </div>
+                        <div class="item">
+                            <label for="4">
+                                <input class="radio" type="radio" name="feedback" id="4" value="4">
+                                <span>😍</span>
+                            </label>
+                        </div>
                     </div>
-                    <input class="fr__input" id="face-rating" type="range" value="2.5" min="0" max="5" step="0.1">
                     <label for="review-text">Heb je nog opmerkingen?</label>
-                    <textarea class="review-text" id="review-text" placeholder="Laat hier een opmerking achter."></textarea>
-                    <button type="submit" id="submit-review">Done</button>
+                    <textarea class="review-text" id="review-text"
+                        placeholder="Laat hier een opmerking achter."></textarea>
+                    <div class="form-buttons">
+                        <button type="button" id="skip">Overslaan</button>
+                        <button type="submit" id="submit-review">Klaar</button>
+                    </div>
                 </form>
             </div>
-
+            <div class="review-container" id="grattitude-container">
+                <div class="text-container">
+                    <h1>Bedankt voor je feedback!</h1>
+                    <p>Wij waarderen je feedback enorm. Bedankt voor het helpen verbeteren van de chatbot.</p>
+                </div>
+                <img class="grattitude-gif" src="~/resources/pedro.gif" alt="Feedback illustration">
+                <button type="button" id="close-grattitude">Sluiten</button>
+            </div>
         </div>
     </div>
 </body>
-</html>
 
+</html>

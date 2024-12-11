@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-family: 'All-Round-Gothic', sans-serif;
+    margin: 0;
+}
+
+p {
+    font-family: 'Work Sans', sans-serif;
+    margin: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    top: 0;
+    width: 100vw;
+    height: 50px;
+    z-index: 10;
+    background: linear-gradient(150deg, #209bff 0%, #0028da 100%);
+    position: absolute;
+}
+
+.navbar.animate {
+    height: 100vh;
+    animation: background-move-up 1s cubic-bezier(0.75, 0, 0.25, 1) forwards;
+    animation-delay: 2s;
+}
+
+.navbar .help, .navbar .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    gap: 10px;
+    margin: 0 20px;
+}
+
+.navbar .help {
+    cursor: pointer;
+}
+
+.page-container {
+    height: 100vh;
+    max-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.page {
+    display: flex;
+    height: calc(100% - 50px);
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+}

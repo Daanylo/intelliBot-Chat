@@ -1,0 +1,108 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: whitesmoke;
+    font-family: 'Work Sans', sans-serif;
+    height: 100vh;
+    max-height: 100vh;
+}
+
+h1 {
+    margin: 0;
+}
+
+p {
+    font-family: 'Work Sans', sans-serif;
+    color: #333;
+    margin: 0;
+}
+
+button {
+    font-size: 18px;
+    display: inline-block;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    will-change: box-shadow,transform;
+    background: radial-gradient( 100% 100% at 100% 0%, #89E5FF 0%, #5468FF 100% );
+    box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%), 0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.2em 0px #3c4fe0;
+    transform: translateY(-0.2em);
+    padding: 0 2em;
+    border-radius: 0.3em;
+    color: #fff;
+    height: 2.6em;
+    text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+button:active {
+    box-shadow: inset 0px 0.1em 0.6em #3c4fe0;
+    transform: translateY(0em);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    top: 0;
+    width: 100vw;
+    height: 50px;
+    background: radial-gradient( 100% 100% at 100% 0%, #89E5FF 0%, #5468FF 100% );
+    box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%), 0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%);
+    transform: translateY(-0.2em);
+    text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+}
+
+.navbar.animate {
+    height: 100vh;
+
+}
+
+.start-animations .navbar.animate {
+    animation: background-move-up 1s cubic-bezier(0.75, 0, 0.25, 1) forwards;
+    animation-delay: 2s;
+}
+
+.navbar .help, .navbar .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    gap: 10px;
+    margin: 0 20px;
+}
+
+.navbar p {
+    color: white;
+}
+
+.navbar .help {
+    cursor: pointer;
+}
+
+.page-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.content-wrapper {
+    flex-grow: 1;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page {
+    display: flex;
+    height: calc(100% - 50px);
+    margin-top: 50px;
+    flex-direction: column;
+    box-sizing: border-box;
+}

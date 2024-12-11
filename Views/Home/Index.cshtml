@@ -1,0 +1,78 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>intelliBot</title>
+    <link rel="icon" type="image/x-icon" href="~/resources/intelliguide_icon.ico">
+    <script src="~/js/index.js" defer></script>
+    <link rel="stylesheet" href="~/css/index.css">
+    <link rel="stylesheet" href="~/css/styles.css">
+    <link rel="stylesheet" href="https://use.typekit.net/biq6ldp.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="page-container">
+        <div class="start-button"><p>Start</p></div>
+        <div class="overlay">
+            <img src="~/resources/intelliguide_icon_white.png" alt="intelliguide_logo">
+        </div>
+        <div class="navbar animate">
+            <div class="title">
+                <h1>Select Language</h1>
+            </div>
+            <div class="help">
+                <p>Help</p>
+                <i class="fa-solid fa-circle-question"></i>
+            </div>
+            <div class="logo-animation-container">
+                <audio id="audio" src="~/resources/startup_sound.mp3"></audio>
+                <img class="logo" src="~/resources/intelliguide_icon_white.png" alt="intelliguide_logo">
+                <div class="letters">
+                    <h1>i</h1>
+                    <h1>n</h1>
+                    <h1>t</h1>
+                    <h1>e</h1>
+                    <h1>l</h1>
+                    <h1>l</h1>
+                    <h1>i</h1>
+                    <h1>G</h1>
+                    <h1>u</h1>
+                    <h1>i</h1>
+                    <h1>d</h1>
+                    <h1>e</h1>
+                </div>
+            </div>
+        </div>
+        <div class="page language-select">
+            <h1>Taal / Language / Sprache / Langue / Lengua</h1>
+            <div class="languages-container">
+                <div class="language" id="Nederlands">
+                    <img src="~/resources/dutch_flag.png" alt="dutch_flag">
+                    <p>Nederlands</p>
+                </div>
+                <div class="language" id="English">
+                    <img src="~/resources/uk_flag.png" alt="english_flag">
+                    <p>English</p>
+                </div>
+                <div class="language" id="Deutch">
+                    <img src="~/resources/german_flag.png" alt="german_flag">
+                    <p>Deutch</p>
+                </div>
+                <div class="language" id="Français">
+                    <img src="~/resources/french_flag.png" alt="french_flag">
+                    <p>Français</p>
+                </div>
+                <div class="language" id="Español">
+                    <img src="~/resources/spanish_flag.png" alt="spanish_flag">
+                    <p>Español</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,212 @@
+﻿.overlay {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(150deg, #209bff 0%, #0028da 100%);
+    z-index: 20;
+    overflow: hidden;
+}
+
+.overlay.end {
+    right: 0;
+    animation: slide-over-end 1s cubic-bezier(0.75, 0, 0.25, 1) forwards;
+    width: 100vw;
+}
+
+.overlay.start {
+    left: 0;
+    width: 0vw;
+}
+
+.overlay.start.animate {
+    animation: slide-over-start 1s cubic-bezier(0.75, 0, 0.25, 1) forwards;
+}
+
+.overlay img {
+    width: 500px;
+}
+
+@keyframes slide-over-start {
+    0% {
+        width: 0vw;
+    }
+
+    100% {
+        width: 100vw;
+    }
+}
+
+@keyframes slide-over-end {
+    0% {
+        width: 100vw;
+    }
+
+    100% {
+        width: 0;
+    }
+}
+
+.page.conversation {
+    padding: 20px;
+    position: relative;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-direction: column;
+}
+
+.conversation-wrapper {
+    position: relative;
+    display: flex;
+    height: 700px;
+    flex-direction: column;
+}
+
+.conversation-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    align-items: center;
+    text-align: center;
+}
+
+.overlay-top, .overlay-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.overlay-top {
+    top: 0;
+    background: linear-gradient(to bottom, whitesmoke, transparent);
+}
+
+.overlay-bottom {
+    bottom: 0;
+    background: linear-gradient(to top, whitesmoke, transparent);
+}
+
+.conversation-box {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.conversation-box.answer {
+    color: black;
+}
+
+.conversation-box.question {
+    color: gray;
+}
+
+.conversation-message {
+    font-weight: bold;
+    font-size: 4em;
+}
+
+.gui-bar {
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    gap: 50px;
+    color: white;
+    z-index: 10;
+}
+
+.gui-button {
+    font-size: 2em;
+    width: 75px;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    transition: .3s ease-in-out;
+}
+
+.gui-button:hover {
+    cursor: pointer;
+}
+
+#submit {
+    display: none;
+    background: linear-gradient(150deg, #209bff 0%, #0028da 100%);
+}
+
+#submit.active {
+    display: flex;
+}
+
+#retry.active {
+    display: flex;
+}
+
+#retry {
+    display: none;
+    background: linear-gradient(150deg, #ff2020 0%, #c50000 100%);
+}
+
+.microphone-button {
+    background: linear-gradient(150deg, #4e4e4e 0%, #000000 100%);
+    font-size: 4em;
+    width: 100px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-radius: 50px;
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+.microphone-button:hover {
+    cursor: pointer;
+}
+
+.microphone-button.active {
+    background: linear-gradient(150deg, #209bff 0%, #0028da 100%);
+}
+
+.fade-overlay {
+    background: linear-gradient(whitesmoke, transparent, transparent, whitesmoke);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+}
+
+.finish-conversation {
+    position: absolute;
+    color: white;
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+    border-radius: 20px;
+    right: 0;
+    bottom: 0;
+    margin: 20px;
+    background: linear-gradient(150deg, #209bff 0%, #0028da 100%);
+}
+
+.finish-conversation i {
+    font-size: 3em;
+}
+
+.finish-conversation:hover {
+    cursor: pointer;
+}

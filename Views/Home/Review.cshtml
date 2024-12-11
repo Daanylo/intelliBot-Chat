@@ -1,0 +1,55 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>intelliBot</title>
+    <link rel="icon" type="image/x-icon" href="~/resources/intelliguide_icon.ico">
+    <script src="~/js/review.js" defer></script>
+    <link rel="stylesheet" href="~/css/review.css">
+    <link rel="stylesheet" href="~/css/review-form.css">
+    <link rel="stylesheet" href="~/css/styles.css">
+    <link rel="stylesheet" href="https://use.typekit.net/biq6ldp.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="page-container">
+        <div class="navbar">
+            <div class="title">
+                <h1>REVIEW</h1>
+            </div>
+            <div class="help">
+                <p>Help</p>
+                <i class="fa-solid fa-circle-question"></i>
+            </div>
+        </div>
+        <div class="content-wrapper">
+            <div class="review-container">
+                <div class="text-container">
+                    <h1>Help ons</h1>
+                    <p>Wij willen graag weten hoe je de chatbot hebt ervaren. Laat ons weten wat je van de chatbot vindt.</p>
+                </div>
+                <form class="fr" action="">
+                    <label for="face-rating">Hoe tevreden ben je met de antwoorden die je hebt gekregen?</label>
+                    <div class="fr__face" role="img" aria-label="Straight face">
+                        <div class="fr__face-right-eye" data-right></div>
+                        <div class="fr__face-left-eye" data-left></div>
+                        <div class="fr__face-mouth-lower" data-mouth-lower></div>
+                        <div class="fr__face-mouth-upper" data-mouth-upper></div>
+                    </div>
+                    <input class="fr__input" id="face-rating" type="range" value="2.5" min="0" max="5" step="0.1">
+                    <label for="review-text">Heb je nog opmerkingen?</label>
+                    <textarea class="review-text" id="review-text" placeholder="Laat hier een opmerking achter."></textarea>
+                    <button type="submit" id="submit-review">Done</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
+

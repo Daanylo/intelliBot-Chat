@@ -6,7 +6,7 @@ namespace intelliBot.Controllers
 {
     public static class ContextController
     {
-        readonly static List<Context> contexts = DataController.GetContexts();
+        readonly static List<Context>? contexts = DataController.GetContexts().Data;
 
         private static string botLanguage = BotController.botLanguage;
 

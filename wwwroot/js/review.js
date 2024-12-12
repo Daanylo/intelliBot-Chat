@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     closeButton.addEventListener('click', navigateHome);
 
+    chooseRandomGif();
+
     form.addEventListener('submit', (event) => {
         event.preventDefault();
 
@@ -43,4 +45,25 @@ const showGrattitude = () => {
 
 const navigateHome = () => {
     window.location.href = '/Home/Index';
+};
+
+const chooseRandomGif = () => {
+    const gifs = [
+        '/resources/pedro.gif',
+        '/resources/happy-bot.gif',
+        '/resources/george-floyd.gif',
+        '/resources/elmo.gif',
+        '/resources/biden-smile.gif',
+        '/resources/titanic.gif',
+        '/resources/hindenburg.gif'
+    ];
+
+    function getRandomGif() {
+        const randomIndex = Math.floor(Math.random() * gifs.length);
+        return gifs[randomIndex];
+    }
+
+    const gifElement = document.getElementById('grattitude-gif');
+    gifElement.src = getRandomGif();
+
 };

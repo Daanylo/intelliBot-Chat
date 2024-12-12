@@ -5,7 +5,7 @@ recognition.interimResults = true;
 recognition.lang = 'nl-NL';
 let awaitingUserAction = false;
 let isListening = false;
-let userStoppedRecognition = false; // Flag to indicate if recognition was stopped by the user
+let userStoppedRecognition = false;
 
 recognition.addEventListener('result', (event) => {
     const transcript = Array.from(event.results)
@@ -23,14 +23,15 @@ document.addEventListener('DOMContentLoaded', () => {
     newAnswer.classList.add('conversation-box', 'answer');
     newAnswer.innerHTML =
         `<div class="conversation-message">
-            <p>Hi, I'm intelliBot. How can I help you today?</p>
+            <p class="message-text">Hi, I'm intelliBot. How can I help you today?</p>
         </div>`;
     document.querySelector('.conversation-container').appendChild(newAnswer);
+    autoType(newAnswer, 100);
     var newQuestion = document.createElement('div');
     newQuestion.classList.add('conversation-box', 'question');
     newQuestion.innerHTML =
     `<div class="conversation-message" id="question">
-            <p></p>
+            <p class="message-text"></p>
      </div>`;
     document.querySelector('.conversation-container').appendChild(newQuestion);
 
@@ -38,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!awaitingUserAction && !isListening) {
             recognition.start();
         } else if (!awaitingUserAction && isListening) {
-            userStoppedRecognition = true; // Set the flag to true when the user stops recognition
+            userStoppedRecognition = true;
             recognition.stop();
         }
     });
@@ -46,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 recognition.addEventListener('start', () => {
     isListening = true;
-    userStoppedRecognition = false; // Reset the flag when recognition starts
+    userStoppedRecognition = false;
     startMicrophoneVisualization();
     console.log('Speech recognition started');
 });
@@ -54,9 +55,10 @@ recognition.addEventListener('start', () => {
 recognition.addEventListener('end', async () => {
     if (userStoppedRecognition) {
         isListening = false;
-        document.querySelector('.microphone-button').style.transform = 'scale(1)';
+        document.getElementById('microphone-backdrop').style.transform = 'scale(1)';
+        document.getElementById('microphone-backdrop').style.display = 'none';
         document.querySelector('.microphone-button').classList.remove('active');
-        return; // Exit early if recognition was stopped by the user
+        return;
     }
 
     const question = document.querySelector('.conversation-container').lastChild;
@@ -66,10 +68,10 @@ recognition.addEventListener('end', async () => {
         return;
     }
     isListening = false;
-    document.querySelector('.microphone-button').style.transform = 'scale(1)';
+    document.getElementById('microphone-backdrop').style.transform = 'scale(1)';
+    document.getElementById('microphone-backdrop').style.display = 'none';
     document.querySelector('.microphone-button').classList.remove('active');
-    document.querySelectorAll('.gui-button').forEach(button => 
-        button.classList.add('active'));
+    document.getElementById('submit').classList.add('active');
     try {
         const action = await waitForUserAction();
         if (action === 'submit') {
@@ -80,15 +82,14 @@ recognition.addEventListener('end', async () => {
         }
     } finally {
         awaitingUserAction = false;
-        document.querySelectorAll('.gui-button').forEach(button => 
-            button.classList.remove('active'));
+        document.getElementById('submit').classList.remove('active');
     }
 });
 
 function waitForUserAction() {
     awaitingUserAction = true;
     return new Promise((resolve) => {
-        document.getElementById('retry').addEventListener('click', () => {
+        document.getElementById('microphone-button').addEventListener('click', () => {
             resolve('retry');
         });
         document.getElementById('submit').addEventListener('click', () => {
@@ -128,15 +129,16 @@ const displayAnswer = (answer) => {
     newAnswer.classList.add('conversation-box', 'answer');
     newAnswer.innerHTML =
         `<div class="conversation-message" id="answer">
-            <p>${answer}</p>
+            <p class="message-text">${answer}</p>
         </div>`;
     const container = document.querySelector('.conversation-container');
     container.appendChild(newAnswer);
+    autoType(newAnswer, 100);
     var newQuestion = document.createElement('div');
     newQuestion.classList.add('conversation-box', 'question');
     newQuestion.innerHTML =
     `<div class="conversation-message" id="question">
-            <p></p>
+            <p class="message=text"></p>
      </div>`;
     container.appendChild(newQuestion);
     container.scrollTop = container.scrollHeight;
@@ -148,6 +150,7 @@ document.getElementById("finish-conversation").addEventListener('click', () => {
 
 function startMicrophoneVisualization() {
     const element = document.querySelector('.microphone-button');
+    const backdrop = document.getElementById('microphone-backdrop');
     element.classList.add('active');
     navigator.mediaDevices.getUserMedia({ audio: true })
       .then(stream => {
@@ -167,17 +170,15 @@ function startMicrophoneVisualization() {
 
           analyser.getByteFrequencyData(dataArray);
 
-          // Get average volume
           const volume = dataArray.reduce((acc, val) => acc + val, 0) / dataArray.length;
 
-          // Normalize the volume to a scale between 1 and 1.5
-          const minScale = 1; // Minimum scale
-          const maxScale = 5; // Maximum scale
-          const normalizedVolume = Math.min(volume / 255, 1); // Ensure volume is capped at 1
+          const minScale = 1;
+          const maxScale = 5;
+          const normalizedVolume = Math.min(volume / 255, 1);
           const scale = minScale + (normalizedVolume * (maxScale - minScale));
 
-          // Apply the scale transformation
-          element.style.transform = `scale(${scale})`;
+          backdrop.style.display = 'block';
+          backdrop.style.transform = `scale(${scale})`;
 
           requestAnimationFrame(updatePosition);
         }
@@ -188,4 +189,31 @@ function startMicrophoneVisualization() {
         console.error('Error accessing the microphone:', err);
         alert('Microphone access is required for this demo.');
       });
+}
+
+function autoType(element, typingSpeed) {
+    element.style.position = "relative";
+    element.style.display = "inline-block";
+
+    var cursor = document.createElement('div');
+    cursor.className = 'cursor';
+
+    element.prepend(cursor);
+
+    var textElement = element.querySelector('.message-text');
+    var text = textElement.textContent.trim().split('');
+    var amntOfChars = text.length;
+    var newString = "";
+    textElement.textContent = "";
+
+    textElement.style.opacity = 1;
+    for (var i = 0; i < amntOfChars; i++) {
+        (function(i, char) {
+            setTimeout(function() {
+                newString += char;
+                textElement.textContent = newString;
+            }, i * typingSpeed);
+        })(i + 1, text[i]);
+    }
+
 }

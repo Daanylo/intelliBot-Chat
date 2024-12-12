@@ -12,11 +12,6 @@
     animation: scale-in-center 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
-.review-container .text-container {
-    border-left: 5px solid #5468FF;
-    padding-left: 20px;
-}
-
 .review-form {
     display: flex;
     flex-direction: column;
@@ -90,40 +85,18 @@
     color: #333;
     box-shadow: none;
 }
-@keyframes scale-in-center {
-    0% {
-        transform: scale(0);
-        opacity: 0;
-        filter: blur(10px);
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-        filter: blur(0);
-    }
-}
 
-@keyframes scale-out-center {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-        filter: blur(0);
-    }
-    100% {
-        transform: scale(0);
-        opacity: 0;
-        filter: blur(10px);
-    }
-}
 
 #grattitude-container {
     display: none;
 }
 
-.grattitude-gif {
+#grattitude-gif {
     width: 200px;
+    height: 200px;
     border-radius: 50%;
     align-self: center;
+    object-fit: cover;
 }
 
 #close-grattitude {

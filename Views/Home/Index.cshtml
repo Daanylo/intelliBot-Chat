@@ -4,6 +4,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,11 +14,19 @@
     <link rel="stylesheet" href="~/css/index.css">
     <link rel="stylesheet" href="~/css/styles.css">
     <link rel="stylesheet" href="https://use.typekit.net/biq6ldp.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+        integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
     <div class="page-container">
-        <button class="start-button">START</button>
+        <div id="error-message" class="error-message">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <p></p>
+            <i class="fa-solid fa-xmark" id="close-error"></i>
+        </div>
+        <button class="start-button" id="start-button">START</button>
         <div class="navbar animate">
             <div class="title">
                 <h1>Select Language</h1>
@@ -45,9 +54,12 @@
                 </div>
             </div>
         </div>
-        <div class="page language-select">
-            <h1>Taal / Language / Sprache / Langue / Lengua</h1>
-            <div class="languages-container">
+        <div class="content-wrapper language-select">
+            <div class="container languages">
+                <div class="text-container">
+                    <h1>Selecteer een taal</h1>
+                    <p>De chatbot zal in deze taal antwoorden.</p>
+                </div>
                 <div class="language" id="Nederlands">
                     <img src="~/resources/dutch_flag.png" alt="dutch_flag">
                     <p>Nederlands</p>
@@ -68,8 +80,12 @@
                     <img src="~/resources/spanish_flag.png" alt="spanish_flag">
                     <p>Español</p>
                 </div>
+                <button type="button" id="submit-language">
+                    <p>Start gesprek</p>
+                </button>
             </div>
         </div>
     </div>
 </body>
+
 </html>

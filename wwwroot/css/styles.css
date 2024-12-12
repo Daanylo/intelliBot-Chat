@@ -39,6 +39,10 @@ button:active {
     transform: translateY(0em);
 }
 
+button p {
+    color: white;
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -115,6 +119,50 @@ button:active {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+    align-items: start;
+    background-color: white;
+    border-radius: 20PX;
+    box-shadow: -3px 3px 10px 0px rgba(0, 0, 0, 0.1);
+    animation: scale-in-center 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes scale-in-center {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+        filter: blur(10px);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes scale-out-center {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        filter: blur(0);
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+        filter: blur(10px);
+    }
+}
+
+.text-container {
+    border-left: 5px solid #5468FF;
+    padding-left: 20px;
 }
 
 .page {

@@ -1,8 +1,6 @@
 ﻿using intelliBot.Controllers;
 using intelliBot.Models;
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
 
 namespace intelliBot
 {
@@ -10,25 +8,38 @@ namespace intelliBot
     {
         private static readonly string connectionString = "server=192.168.154.189;database=intelliGuide;user=Daan;password=Daanpassword@22";
 
-        private static List<T> ExecuteQuery<T>(string query, Action<MySqlCommand> parameterize, Func<MySqlDataReader, T> readData)
+        private static ApiResponse<List<T>> ExecuteQuery<T>(string query, Action<MySqlCommand> parameterize, Func<MySqlDataReader, T> readData)
         {
             var results = new List<T>();
-            using var connection = new MySqlConnection(connectionString);
-            connection.Open();
-
-            using var command = new MySqlCommand(query, connection);
-            parameterize(command);
-
-            using var reader = command.ExecuteReader();
-            while (reader.Read())
+            try
             {
-                results.Add(readData(reader));
-            }
+                using var connection = new MySqlConnection(connectionString);
+                connection.Open();
 
-            return results;
+                using var command = new MySqlCommand(query, connection);
+                parameterize(command);
+
+                using var reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    results.Add(readData(reader));
+                }
+
+                return new ApiResponse<List<T>>(results);
+            }
+            catch (MySqlException ex)
+            {
+                Console.Error.WriteLine($"MySQL error: {ex.Message}");
+                return new ApiResponse<List<T>>(null, $"MySQL error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"General error: {ex.Message}");
+                return new ApiResponse<List<T>>(null, $"General error: {ex.Message}");
+            }
         }
 
-        public static List<Context> GetContexts()
+        public static ApiResponse<List<Context>> GetContexts()
         {
             string query = "SELECT * FROM context WHERE bot_id = @botId";
             return ExecuteQuery(query, 
@@ -43,7 +54,7 @@ namespace intelliBot
                 });
         }
 
-        public static List<Answer> GetAnswers(string conversationId)
+        public static ApiResponse<List<Answer>> GetAnswers(string conversationId)
         {
             string query = "SELECT * FROM answer WHERE conversation_id = @conversationId";
             return ExecuteQuery(query, 
@@ -57,7 +68,7 @@ namespace intelliBot
                 });
         }
 
-        public static List<Question> GetQuestions(string conversationId)
+        public static ApiResponse<List<Question>> GetQuestions(string conversationId)
         {
             string query = "SELECT * FROM question WHERE conversation_id = @conversationId";
             return ExecuteQuery(query, 
@@ -71,7 +82,7 @@ namespace intelliBot
                 });
         }
 
-        public static List<Conversation> GetConversations()
+        public static ApiResponse<List<Conversation>> GetConversations()
         {
             string query = "SELECT * FROM conversation WHERE bot_id = @botId";
             return ExecuteQuery(query, 
@@ -87,7 +98,7 @@ namespace intelliBot
                 });
         }
 
-        public static Bot? GetBot()
+        public static ApiResponse<Bot>? GetBot()
         {
             string query = "SELECT * FROM bot WHERE bot_id = @botId";
             var bots = ExecuteQuery(query, 
@@ -110,7 +121,11 @@ namespace intelliBot
                     IsActive = Convert.ToBoolean(reader["status"])
                 });
 
-            return bots.FirstOrDefault();
+            if (bots.Data != null && bots.Data.Count > 0)
+            {
+                return new ApiResponse<Bot>(bots.Data[0]);
+            }
+            return new ApiResponse<Bot>(null, "Bot not found");
         }
     }
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("intelliBot")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c689db491e69ecd809b659f3d5949177778db7e6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b7e3e7354abfc868487e063e9d5bb72a9f25eef")]
 [assembly: System.Reflection.AssemblyProductAttribute("intelliBot")]
 [assembly: System.Reflection.AssemblyTitleAttribute("intelliBot")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

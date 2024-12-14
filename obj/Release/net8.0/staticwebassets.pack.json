@@ -13,6 +13,14 @@
       "PackagePath": "staticwebassets\\css\\index.css"
     },
     {
+      "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\css\\microphone-button.css",
+      "PackagePath": "staticwebassets\\css\\microphone-button.css"
+    },
+    {
+      "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\css\\review.css",
+      "PackagePath": "staticwebassets\\css\\review.css"
+    },
+    {
       "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -39,6 +47,10 @@
     {
       "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\js\\index.js",
       "PackagePath": "staticwebassets\\js\\index.js"
+    },
+    {
+      "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\js\\review.js",
+      "PackagePath": "staticwebassets\\js\\review.js"
     },
     {
       "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\js\\site.js",
@@ -277,16 +289,36 @@
       "PackagePath": "staticwebassets\\manifest.webmanifest"
     },
     {
+      "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\resources\\biden-smile.gif",
+      "PackagePath": "staticwebassets\\resources\\biden-smile.gif"
+    },
+    {
       "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\resources\\dutch_flag.png",
       "PackagePath": "staticwebassets\\resources\\dutch_flag.png"
+    },
+    {
+      "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\resources\\elmo.gif",
+      "PackagePath": "staticwebassets\\resources\\elmo.gif"
     },
     {
       "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\resources\\french_flag.png",
       "PackagePath": "staticwebassets\\resources\\french_flag.png"
     },
     {
+      "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\resources\\george-floyd.gif",
+      "PackagePath": "staticwebassets\\resources\\george-floyd.gif"
+    },
+    {
       "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\resources\\german_flag.png",
       "PackagePath": "staticwebassets\\resources\\german_flag.png"
+    },
+    {
+      "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\resources\\happy-bot.gif",
+      "PackagePath": "staticwebassets\\resources\\happy-bot.gif"
+    },
+    {
+      "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\resources\\hindenburg.gif",
+      "PackagePath": "staticwebassets\\resources\\hindenburg.gif"
     },
     {
       "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\resources\\intelliguide_icon.ico",
@@ -313,12 +345,24 @@
       "PackagePath": "staticwebassets\\resources\\intelliguide_logo_white.png"
     },
     {
+      "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\resources\\pedro.gif",
+      "PackagePath": "staticwebassets\\resources\\pedro.gif"
+    },
+    {
       "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\resources\\robotje2.png",
       "PackagePath": "staticwebassets\\resources\\robotje2.png"
     },
     {
       "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\resources\\spanish_flag.png",
       "PackagePath": "staticwebassets\\resources\\spanish_flag.png"
+    },
+    {
+      "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\resources\\startup_sound.mp3",
+      "PackagePath": "staticwebassets\\resources\\startup_sound.mp3"
+    },
+    {
+      "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\resources\\titanic.gif",
+      "PackagePath": "staticwebassets\\resources\\titanic.gif"
     },
     {
       "Id": "C:\\Users\\Daan\\source\\repos\\intelliBot\\intelliBot\\wwwroot\\resources\\uk_flag.png",

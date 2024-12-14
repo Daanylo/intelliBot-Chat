@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("intelliBot")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5c920f3bda354e7e5e7a9246bec5d596f4ceceb2")]
 [assembly: System.Reflection.AssemblyProductAttribute("intelliBot")]
 [assembly: System.Reflection.AssemblyTitleAttribute("intelliBot")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

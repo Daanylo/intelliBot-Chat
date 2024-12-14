@@ -1,65 +1,196 @@
-﻿.overlay {
-    position: absolute;
-    right: 0;
-    width: 100vw;
+﻿.conversation-wrapper {
+    position: relative;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(150deg, #209bff 0%, #0028da 100%);
-    z-index: 20;
-    overflow: hidden;
-    animation: slide-over 1s cubic-bezier(0.75, 0, 0.25, 1) forwards;
-}
-
-.overlay img {
-    width: 500px;
-}
-
-@keyframes slide-over {
-    0% {
-        width: 100vw;
-    }
-
-    100% {
-        width: 0;
-    }
-}
-
-.page.conversation {
-    padding: 20px;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .conversation-container {
-    display: flex;
+    display: grid;
+    place-items: center;
     flex-direction: column;
-    gap: 20px;
-    height: 100%;
-    overflow-y: auto;
+    max-height: 100%;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    align-items: center;
+    text-align: center;
 }
 
 .conversation-box {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 20px;
-    border-radius: 0px 20px 20px 20px;
-    overflow-y: auto;
-    background: linear-gradient(150deg, #209bff 0%, #0028da 100%);
+    font-size: 2em;
 }
 
-.conversation-box.answer {
-    margin-right: 40%;
-    align-self: flex-start;
+.conversation-box.answer .message-text{
+    color: black;
+    opacity: 0;
+    margin-right: 10px;
 }
 
-.conversation-box.question {
-    align-self: flex-end;
-    border-radius: 20px 0px 20px 20px;
-    margin-left: 40%;
+.conversation-box.question p{
+    color: gray;
 }
 
-.conversation-message {
+.cursor {
+    display: block;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: 0px;
+    width: 2px;
+    /* Change colour of Cursor Here */
+    background-color: black;
+    z-index: 1;
+    animation: flash 0.5s none infinite alternate;
+}
+
+@keyframes flash {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+.gui-bar {
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
     color: white;
-    font-weight: bold;
+    z-index: 10;
+}
+
+#submit {
+    display: none;
+    width: 75px;
+    height: 75px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+#submit:hover {
+    cursor: pointer;
+}
+
+#submit.active {
+    display: flex;
+    animation: slide-in-blurred-left 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+}
+
+@keyframes slide-in-blurred-left {
+    0% {
+        transform: translateX(-100px) scaleX(2.5) scaleY(0.2);
+        transform-origin: 100% 50%;
+        filter: blur(40px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0) scaleY(1) scaleX(1);
+        transform-origin: 50% 50%;
+        filter: blur(0);
+        opacity: 1;
+    }
+}
+  
+
+.microphone-container {
+    position: relative;
+    z-index: 10;
+}
+
+.microphone-button {
+    border-radius: 50%;
+    font-size: 2em;
+    padding: 0;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(100% 100% at 100% 0%, #bbbbbb 0%, #6b6b6b 100%);
+    box-shadow: 0px 0.1em 0.2em rgba(61, 61, 61, 0.4), 0px 0.4em 0.7em -0.1em rgba(59, 59, 59, 0.3), inset 0px -0.2em 0px #3a3a3a;
+}
+
+.microphone-button:active {
+    box-shadow: inset 0px 0.1em 0.6em #3a3a3a;
+}
+
+.microphone-button:hover {
+    cursor: pointer;
+}
+
+.microphone-button.active {
+    background: radial-gradient(100% 100% at 100% 0%, #ff8989 0%, #ff5454 100%);
+    animation: animate-gradient 10s linear infinite, hue-rotate 10s linear infinite;
+    box-shadow: inset 0px 0.1em 0.6em #8d2424;
+    transform: translateY(0em);
+}
+
+.microphone-backdrop {
+    display: none;
+    position: absolute;
+    background: radial-gradient(circle, rgba(255, 0, 0, 1) 0%, rgba(255, 0, 0, 0) 70%);
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    bottom: 0;
+    z-index: -1;
+}
+
+@keyframes animate-gradient {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    25% {
+        background-position: 100% 0%;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+
+    75% {
+        background-position: 0% 100%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+@keyframes hue-rotate {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+
+    50% {
+        filter: hue-rotate(15deg);
+    }
+
+    100% {
+        filter: hue-rotate(0deg);
+    }
+}
+
+.fade-overlay {
+    background: linear-gradient(whitesmoke, transparent, transparent, whitesmoke);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+}
+
+#finish-conversation {
+    position: absolute;
+    color: white;
+    right: 0;
+    bottom: 0;
+    margin: 20px;
 }

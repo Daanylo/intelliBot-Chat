@@ -99,8 +99,6 @@ function waitForUserAction() {
 }
 
 const sendQuestion = (question) => {
-    displayAnswer("I'm thinking...");
-    return;
 
     fetch('/Home/ProcessTranscript', {
         method: 'POST',

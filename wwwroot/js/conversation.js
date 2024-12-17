@@ -99,8 +99,7 @@ function waitForUserAction() {
 }
 
 const sendQuestion = (question) => {
-
-    fetch('/Home/ProcessTranscript', {
+    fetch('/Conversation/ProcessTranscript', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -123,6 +122,11 @@ const sendQuestion = (question) => {
 }
 
 const displayAnswer = (answer) => {
+    const uniqueQuery = `?t=${Date.now()}`;
+    const audio = new Audio(`/resources/output.mp3${uniqueQuery}`);
+    audio.play().catch(error => {
+        console.error('Audio play failed:', error);
+    });
     var newAnswer = document.createElement('div');
     newAnswer.classList.add('conversation-box', 'answer');
     newAnswer.innerHTML =
@@ -143,7 +147,7 @@ const displayAnswer = (answer) => {
 }
 
 document.getElementById("finish-conversation").addEventListener('click', () => {
-    window.location.href = '/Home/Review';
+    window.location.href = '/Review/Review';
 });
 
 function startMicrophoneVisualization() {

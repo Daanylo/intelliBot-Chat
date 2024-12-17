@@ -1,14 +1,16 @@
+using intelliBot.Models;
+using dotenv;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
+dotenv.net.DotEnv.Load();
+
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<Bot>();
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
-
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
-}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -19,6 +21,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Index}/{action=Index}/{id?}");
 
 app.Run();

@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!selectedLanguage) {
             return;
         }
-        fetch('/Home/SetLanguage', {
+        fetch('/Index/SetLanguage', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -40,42 +40,31 @@ document.addEventListener('DOMContentLoaded', () => {
             return text ? JSON.parse(text) : {};
         })
         .then(data => {
-            window.location.href = '/Home/Conversation';
+            window.location.href = '/Conversation/Conversation';
         })
         .catch((error) => {
             console.error('Error:', error);
         });
     });
-
-    const fetchBotData = () => {
-        fetch('/api/Bot/GetBot')
-            .then(async response => {
-                if (!response.ok) {
-                    const contentType = response.headers.get('content-type');
-                    let errorData;
-                    if (contentType && contentType.includes('application/json')) {
-                        errorData = await response.json();
-                    } else {
-                        errorData = await response.text();
-                    }
-                    errorMessage.style.display = 'flex';
-                    errorMessage.querySelector('p').textContent = errorData;
-                    throw new Error('Failed to fetch bot data');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Bot data:', data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                setTimeout(fetchBotData, 5000);
-            });
-    };
-
-    fetchBotData();
+    initializeBot();
     listenForLanguageSelection(submitButton);
 });
+
+async function initializeBot() {
+    try {
+        const response = await fetch('/api/bot/initialize', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        console.log(data.message);
+        console.log(data.data);
+    } catch (error) {
+        console.error('Error initializing bot:', error);
+    }
+}
 
 const listenForLanguageSelection = (submitButton) => {
     document.querySelectorAll('.language').forEach(language => {

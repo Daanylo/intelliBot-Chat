@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         showGrattitude();
 
-        fetch('/Home/ProcessReview', {
+        fetch('/Review/ProcessReview', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ const showGrattitude = () => {
 };
 
 const navigateHome = () => {
-    window.location.href = '/Home/Index';
+    window.location.href = '/Index/Index';
 };
 
 const chooseRandomGif = () => {
@@ -55,7 +55,8 @@ const chooseRandomGif = () => {
         '/resources/elmo.gif',
         '/resources/biden-smile.gif',
         '/resources/titanic.gif',
-        '/resources/hindenburg.gif'
+        '/resources/hindenburg.gif',
+        '/resources/apple-dog.gif'
     ];
 
     function getRandomGif() {

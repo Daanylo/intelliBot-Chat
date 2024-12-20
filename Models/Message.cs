@@ -2,11 +2,11 @@
 {
     public class Message
     {
-        public required string Id { get; set; }
-        public required string ConversationId { get; set; }
-        public required MessageType Type { get; set; }
-        public required DateTime Time { get; set; }
-        public required string Body { get; set; }
+        public string? Id { get; set; }
+        public string? ConversationId { get; set; }
+        public MessageType? Type { get; set; }
+        public DateTime? Time { get; set; }
+        public string? Body { get; set; }
     }
     public enum MessageType
     {

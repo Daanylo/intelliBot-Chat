@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('review-form');
     const closeButton = document.getElementById('close-grattitude');
-
+    const skipButton = document.getElementById('skip');
     closeButton.addEventListener('click', navigateHome);
+    skipButton.addEventListener('click', navigateHome);
+
 
     chooseRandomGif();
 
@@ -24,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ feedback: feedbackValue, review: reviewText })
+            body: JSON.stringify({ review: feedbackValue, comment: reviewText })
         })
         .then(response => response.json())
         .then(data => {
@@ -51,12 +53,12 @@ const chooseRandomGif = () => {
     const gifs = [
         '/resources/pedro.gif',
         '/resources/happy-bot.gif',
-        '/resources/george-floyd.gif',
         '/resources/elmo.gif',
         '/resources/biden-smile.gif',
-        '/resources/titanic.gif',
-        '/resources/hindenburg.gif',
-        '/resources/apple-dog.gif'
+        '/resources/apple-dog.gif',
+        '/resources/wazowski-mike.gif',
+        '/resources/hawk-tuah.gif',
+        '/resources/reporter.gif'
     ];
 
     function getRandomGif() {

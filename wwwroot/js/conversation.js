@@ -147,7 +147,27 @@ const displayAnswer = (answer) => {
 }
 
 document.getElementById("finish-conversation").addEventListener('click', () => {
-    window.location.href = '/Review/Review';
+    console.log('Finish conversation button clicked.');
+    fetch('/Conversation/FinishConversation', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+            console.log('Response received:', response);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data);
+            window.location.href = '/Review/Review';
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 });
 
 function startMicrophoneVisualization() {

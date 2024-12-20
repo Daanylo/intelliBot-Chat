@@ -2,9 +2,9 @@
 {
     public class Conversation
     {
-        public required string Id { get; set; }
-        public required string BotId { get; set; }
-        public required DateTime Time { get; set; }
+        public string? Id { get; set; }
+        public string? BotId { get; set; }
+        public DateTime? Time { get; set; }
         public int? Review { get; set; }
         public string? Comment { get; set; }
     }

@@ -13,7 +13,7 @@ namespace intelliBot.Controllers
         {
             string context = contextController.GetContext();
             question = context + question;
-            //return question;
+            //return question;9
 
             ChatClient client = new(model: "gpt-4o-mini", apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY"));
             ChatCompletion completion = client.CompleteChat(question);

@@ -1,5 +1,6 @@
 ﻿using intelliBot.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Org.BouncyCastle.Asn1.Ocsp;
 using System.Configuration;
 using System.Diagnostics;
@@ -7,24 +8,16 @@ using System.Text.Json;
 
 namespace intelliBot.Controllers
 {
-    public class ContextController : ControllerBase
+    public class ContextController(HttpClient httpClient, Bot bot, IConfiguration configuration) : ControllerBase
     {
-        private readonly string context;
-        private readonly HttpClient httpClient;
-        private readonly Bot _bot;
-        public ContextController(HttpClient httpClient, Bot bot)
-        {
-            this.httpClient = httpClient;
-            _bot = bot;
-            context = GetContext();
-        }
-
+        private readonly HttpClient httpClient = httpClient;
+        private readonly Bot bot = bot;
 
         private async Task<List<Context>> GetContexts()
         {
             List<Context> contexts = [];
-            var request = new HttpRequestMessage(HttpMethod.Get, $"http://{Environment.GetEnvironmentVariable("API_ADDRESS")}/api/contexts/{Environment.GetEnvironmentVariable("BOT_ID")}");
-            request.Headers.Add("x-api-key", Environment.GetEnvironmentVariable("INTELLIGUIDE_API_KEY"));
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{configuration["intelliGuide:ApiAddress"]}/api/contexts/{configuration["intelliGuide:BotId"]}");
+            request.Headers.Add("x-api-key", configuration["intelliGuide:ApiKey"]);
 
             var response = await httpClient.SendAsync(request);
             if (response.IsSuccessStatusCode)
@@ -59,13 +52,14 @@ namespace intelliBot.Controllers
         {
             List<Context> contexts = GetContexts().Result;
 
-            string contextString = $"Je bent een robot op een evenement. " +
-                                    $"Je naam is {_bot.Name}. " +
+            string contextString =  $"Je bent een robot op een evenement. " +
+                                    $"Je naam is {bot.Name}. " +
                                     $"Je gaat vragen krijgen van gasten. " +
                                     $"Je mag alleen vragen beantwoorden die over het evenement gaan. " +
-                                    $"Als je het antwoord op een vraag niet weet moet je foutcode (69420) aan het einde van je bericht zetten. " +
-                                    $"Antwoord in deze taal: {_bot.Language}. " +
-                                    $"Eerst volgt de context van het evenement en als laatste de vraag van de gast: ";
+                                    $"Als de context je niet genoeg informatie geeft om de vraag te beantwoorden moet je foutcode (69420) aan het einde van je bericht zetten. " +
+                                    $"Antwoord in deze taal: {bot.Language}. " +
+                                    $"Je spreekstijl is: {bot.Style}." +
+                                    $"Context van het evenement: ";
 
             foreach (var context in contexts)
             {

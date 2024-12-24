@@ -6,8 +6,8 @@ namespace intelliBot.Controllers
 {
     public class IndexController(ILogger<IndexController> logger, Bot bot) : Controller
     {
-        private readonly ILogger<IndexController> _logger = logger;
-        private readonly Bot _bot = bot;
+        private readonly ILogger<IndexController> logger = logger;
+        private readonly Bot bot = bot;
 
         public IActionResult Index()
         {
@@ -22,8 +22,8 @@ namespace intelliBot.Controllers
             {
                 return BadRequest();
             } 
-            _bot.SetLanguage(selectedLanguage);
-            _logger.LogInformation("Language set to: {botLanguage}", _bot.Language);
+            bot.SetLanguage(selectedLanguage);
+            logger.LogInformation("Language set to: {botLanguage}", bot.Language);
             return Ok();
         }
 

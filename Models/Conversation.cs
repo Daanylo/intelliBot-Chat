@@ -2,10 +2,10 @@
 {
     public class Conversation
     {
-        public string? Id { get; set; }
-        public string? BotId { get; set; }
-        public DateTime? Time { get; set; }
-        public int? Review { get; set; }
-        public string? Comment { get; set; }
+        public string? conversation_id { get; set; }
+        public string? bot_id { get; set; }
+        public DateTime? time { get; set; }
+        public int? review { get; set; }
+        public string? comment { get; set; }
     }
 }

@@ -2,15 +2,10 @@
 {
     public class Message
     {
-        public string? Id { get; set; }
-        public string? ConversationId { get; set; }
-        public MessageType? Type { get; set; }
-        public DateTime? Time { get; set; }
-        public string? Body { get; set; }
-    }
-    public enum MessageType
-    {
-        Question,
-        Answer
+        public string? message_id { get; set; }
+        public string? conversation_id { get; set; }
+        public string? type { get; set; }
+        public DateTime? time { get; set; }
+        public string? body { get; set; }
     }
 }

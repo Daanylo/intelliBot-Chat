@@ -1,38 +1,44 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using intelliBot.Models;
+using System.Text;
+using System.Text.Json;
 
 namespace intelliBot.Controllers
 {
-    public class ReviewController : Controller
+    public class ReviewController(ILogger<ReviewController> logger, HttpClient httpClient, IConfiguration configuration) : Controller
     {
-        private readonly ILogger<ReviewController> _logger;
-        private readonly HttpClient _httpClient;
-
-        public ReviewController(ILogger<ReviewController> logger, HttpClient httpClient)
-        {
-            _logger = logger;
-            _httpClient = httpClient;
-        }
+        private readonly ILogger<ReviewController> logger = logger;
+        private readonly HttpClient httpClient = httpClient;
+        private readonly IConfiguration configuration = configuration;
 
         public IActionResult Review()
         {
+            string? botId = HttpContext.Session.GetString("BotId");
+            if (botId == null)
+            {
+                return RedirectToAction("Index", "Unauthorized");
+            }
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> ProcessReview([FromBody] Review userReview)
         {
-            if (ModelState.IsValid)
+            var conversationId = HttpContext.Session.GetString("ConversationId");
+            if (ModelState.IsValid && conversationId != null)
             {
-                _logger.LogInformation("Review: {review}", userReview.review);
-                _logger.LogInformation("Comment: {comment}", userReview.comment);
+                logger.LogInformation("Review: {review}", userReview.review);
+                logger.LogInformation("Comment: {comment}", userReview.comment);
 
-                var request = new HttpRequestMessage(HttpMethod.Post, $"http://{Environment.GetEnvironmentVariable("API_ADDRESS")}/api/contexts/{Environment.GetEnvironmentVariable("BOT_ID")}");
-                request.Headers.Add("x-api-key", Environment.GetEnvironmentVariable("INTELLIGUIDE_API_KEY"));
+                var request = new HttpRequestMessage(HttpMethod.Post, $"{configuration["intelliGuide:ApiAddress"]}/api/review/{conversationId}")
+                {
+                    Content = new StringContent(JsonSerializer.Serialize(userReview), Encoding.UTF8, "application/json")
+                };
+                request.Headers.Add("x-api-key", configuration["intelliGuide:ApiKey"]);
 
-                var response = await _httpClient.SendAsync(request);
+                var response = await httpClient.SendAsync(request);
 
-                return Ok();
+                return Ok( response.IsSuccessStatusCode ? new { message = "Review submitted successfully", botId = HttpContext.Session.GetString("BotId") } : new { message = "Review submission failed" });
             }
             else
             {

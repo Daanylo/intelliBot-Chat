@@ -15,7 +15,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\resources\output.mp3" />
-    <Content Include="wwwroot\resources\output.mp3" Watch="false" />
   </ItemGroup>
 
 </Project>

@@ -5,32 +5,68 @@ using System.Text.Json;
 
 namespace intelliBot.Controllers
 {
-    public class ConversationController(ILogger<ConversationController> logger, HttpClient httpClient, Bot bot, IConfiguration configuration) : Controller
+    public class ConversationController(ILogger<ConversationController> logger, HttpClient httpClient, IConfiguration configuration) : Controller
     {
         private readonly ILogger<ConversationController> logger = logger;
         private readonly HttpClient httpClient = httpClient;
-        private readonly OpenAIController openAIController = new(httpClient, bot, logger, configuration);
-        private readonly Bot bot = bot;
-        public string? conversationId;
+        private readonly OpenAIController openAIController = new(httpClient, logger, configuration);
+
 
         public IActionResult Conversation()
         {
+            string? botId = HttpContext.Session.GetString("BotId");
+            if (botId == null)
+            {
+                return RedirectToAction("Index", "Unauthorized");
+            }
+            string? conversationId = HttpContext.Session.GetString("ConversationId");
+            if (conversationId != null)
+            {
+                HttpContext.Session.Remove("ConversationId");
+                HttpContext.Session.Remove("Context");
+            }
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> ProcessTranscript([FromBody] string transcript)
         {
-            conversationId = HttpContext.Session.GetString("ConversationId");
-            if (conversationId == null)
+            logger.LogInformation("Received transcript: {transcript}", transcript);
+            ISession session = HttpContext.Session;
+            string? botId = session.GetString("BotId");
+            if (botId == null)
+            {
+                return RedirectToAction("Index", "Unauthorized");
+            }
+            if (session.GetString("ConversationId") == null)
             {
                 await StartConversation();
             }
-            logger.LogInformation("Received transcript: {transcript}", transcript);
-            await AddMessage(transcript, "question");
-            string answer = openAIController.GetAnswer(transcript).Result;
-            await AddMessage(answer, "answer");
-            return Ok(new { answer });
+            ContextController contextController = new(httpClient, configuration, new Logger<ContextController>(new LoggerFactory()));
+            string? context;
+            if (string.IsNullOrEmpty(session.GetString("Context")))
+            {
+                logger.LogInformation("No context found, initializing context...");
+                await contextController.InitContext(session, botId);
+                context = session.GetString("Context");
+                logger.LogInformation("Context initialized successfully {context}", context);
+            } else {
+                context = session.GetString("Context");
+            }
+            
+            await AddMessage(Guid.NewGuid().ToString(), transcript, "question");
+            logger.LogInformation("Context sent: {context}", context);
+            string messageId = Guid.NewGuid().ToString();
+            string conversationId = HttpContext.Session.GetString("ConversationId") ?? "";
+            string answer = await openAIController.GetAnswer(context, transcript, conversationId, messageId, HttpContext.Session);
+            await AddMessage(messageId, answer, "answer");
+            contextController.UpdateContext(session, transcript, answer);
+            if (answer.Contains("(69420)") || answer.Contains("69420"))
+            {
+                answer = answer.Replace("(69420)", string.Empty);
+                answer = answer.Replace("69420", string.Empty);
+            }
+            return Ok(new { answer, conversationId, messageId });
         }
 
         [HttpPost]
@@ -44,17 +80,16 @@ namespace intelliBot.Controllers
             Conversation conversation = new()
             {
                 conversation_id = HttpContext.Session.GetString("ConversationId"),
-                bot_id = bot.Id,
+                bot_id = HttpContext.Session.GetString("BotId"),
                 time = DateTime.Now,
                 review = null,
-                comment = null
+                comment = ""
             };
                 var request = new HttpRequestMessage(HttpMethod.Post, $"{configuration["intelliGuide:ApiAddress"]}/api/conversation") 
                 {
                     Content = new StringContent(JsonSerializer.Serialize(conversation), Encoding.UTF8, "application/json")
                 };
                 request.Headers.Add("x-api-key", configuration["intelliGuide:ApiKey"]);
-                logger.LogInformation("{request}", request.ToString());
 
                 var response = await httpClient.SendAsync(request);
                 if (response.IsSuccessStatusCode)
@@ -71,20 +106,19 @@ namespace intelliBot.Controllers
         {
             var guid = Guid.NewGuid().ToString();
             HttpContext.Session.SetString("ConversationId", guid);
-            conversationId = HttpContext.Session.GetString("ConversationId");
             HttpContext.Session.SetString("Messages", JsonSerializer.Serialize(new List<Message>()));
 
             logger.LogInformation("Started conversation with id: {id}", guid);
             await StoreConversation();
         }
 
-        public async Task AddMessage(string messageText, string messageType)
+        public async Task AddMessage(string messageId, string messageText, string messageType)
         {
             var messagesJson = HttpContext.Session.GetString("Messages");
             var messages = messagesJson != null ? JsonSerializer.Deserialize<List<Message>>(messagesJson) : [];
             Message message = new()
             {
-                message_id = Guid.NewGuid().ToString(),
+                message_id = messageId,
                 conversation_id = HttpContext.Session.GetString("ConversationId"),
                 type = messageType,
                 time = DateTime.Now,
@@ -114,6 +148,22 @@ namespace intelliBot.Controllers
             {
                 logger.LogError("Failed to store message: {StatusCode}", response.StatusCode);
             }
+        }
+
+        public async Task<IActionResult> GetGreeting()
+        {
+            string? botId = HttpContext.Session.GetString("BotId");
+            if (botId == null)
+            {
+                return RedirectToAction("Index", "Unauthorized");
+            }
+            BotController botController = new(new Logger<BotController>(new LoggerFactory()), httpClient, configuration);
+            Bot? bot = await botController.GetBot(botId);
+            if (bot == null)
+            {
+                return NotFound();
+            }
+            return Ok(new { greeting = bot.Greeting });
         }
     }
 }

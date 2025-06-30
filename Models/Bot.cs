@@ -1,27 +1,27 @@
-﻿namespace intelliBot.Models
-{
-    public class Bot
-    {
-        public string? Id = Environment.GetEnvironmentVariable("BOT_ID");
-        public string? Name { get; set; }
-        public string? Avatar { get; set; }
-        public SpeechStyle? Style { get; set; }
-        public string? Location { get; set; }
-        public string? Language { get; private set; }
-        public void SetLanguage(string language)
-        {
-            string[] languages = ["Nederlands", "English", "Français", "Español", "Deutch"];
-            if (languages.Contains(language))
-            {
-                Language = language;
-            }
-        }
-    }
+﻿using System.Text.Json.Serialization;
 
-    public enum SpeechStyle
-    {
-        Formal,
-        Informal,
-        Goofy
+namespace intelliBot.Models
+{
+public class Bot {
+    [JsonPropertyName("bot_id")]
+    public required string BotId { get; set; }
+    [JsonPropertyName("user_id")]
+    public string? UserId { get; set; }
+    [JsonPropertyName("event_id")]
+    public string? EventId { get; set; }
+    [JsonPropertyName("name")]
+    public string? Name { get; set; }
+    [JsonPropertyName("avatar")]
+    public string? Avatar { get; set; }
+    [JsonPropertyName("style")]
+    public string? Style { get; set; }
+    [JsonPropertyName("voice")]
+    public string? Voice { get; set; }
+    [JsonPropertyName("greeting")]
+    public string? Greeting { get; set; }
+    [JsonPropertyName("location")]
+    public string? Location { get; set; }
+    [JsonPropertyName("status")]
+    public string? Status { get; set; }
     }
 }

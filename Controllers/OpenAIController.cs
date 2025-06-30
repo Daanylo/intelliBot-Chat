@@ -1,23 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OpenAI.Chat;
 using System.Text.Json;
 using intelliBot.Models;
-using Microsoft.CognitiveServices.Speech;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace intelliBot.Controllers
 {
-    public class OpenAIController(HttpClient httpClient, Bot bot, ILogger<ConversationController> logger, IConfiguration configuration) : ControllerBase
+    public class OpenAIController(HttpClient httpClient, ILogger<ConversationController> logger, IConfiguration configuration) : ControllerBase
     {
 
         private readonly HttpClient httpClient = httpClient;
         private readonly ILogger<ConversationController> logger = logger;
-        private readonly ContextController contextController = new(httpClient, bot, configuration);
-        private readonly TextToSpeechController textToSpeechController = new(configuration);
+        private readonly TextToSpeechController textToSpeechController = new(configuration, logger);
 
-        public async Task<string> GetAnswer(string question)
+        public async Task<string> GetAnswer(string? context, string question, string conversationId, string messageId, ISession session)
         {
-            // return "This is a placeholder answer.";
-            string context = contextController.GetContext();
+            // return "This is a test. aaaaaaaabbbbbbbbcccccccccccccc (69420) https://google.com.";
+            if (string.IsNullOrEmpty(context))
+            {
+                logger.LogError("Context or question is null or empty.");
+                return "Error: Context or question is null or empty.";
+            }
+
+            question = "User question: " + question;
+
             var messages = new[]
             {
                 new { role = "system", content = context },
@@ -44,7 +49,7 @@ namespace intelliBot.Controllers
             var response = await httpClient.SendAsync(httpRequestMessage);
             if (!response.IsSuccessStatusCode)
             {
-                logger.LogError($"OpenAI API call failed with status code: {response.StatusCode}");
+                logger.LogError("OpenAI API call failed with status code: {responseStatusCode}", response.StatusCode);
                 return $"Error: {response.StatusCode}";
             }
 
@@ -64,25 +69,43 @@ namespace intelliBot.Controllers
                 }
 
                 string answer = completion.Choices[0].Message.Content;
+                string ttsAnswer = answer;
+                if (ttsAnswer.Contains("http"))
+                {
+                    var words = answer.Split(' ');
+                    ttsAnswer = string.Join(' ', words.Where(word => !word.StartsWith("http")));
+                }
+                if (ttsAnswer.Contains("(69420)") || ttsAnswer.Contains("69420"))
+                {
+                    ttsAnswer = ttsAnswer.Replace("(69420)", "");
+                    ttsAnswer = ttsAnswer.Replace("69420", "");
+                }
+                string? botVoice = session.GetString("BotVoice");
+                string? botLanguage = session.GetString("BotLanguage");
+                
 
                 TTSModel model = new()
                 {
-                    Text = answer,
-                    SelectedVoice = "en-US-AriaNeural"
+                    Text = ttsAnswer,
+                    SelectedVoice = Voice.en_GB_OllieMultilingualNeural
                 };
-                await textToSpeechController.TextToSpeech(model);
+                if (botLanguage != null && botVoice != null) {
+                    model.SetVoiceByLanguage(botLanguage, botVoice);
+                }
+                await textToSpeechController.TextToSpeech(model, conversationId, messageId);
 
                 return answer;
             }
             catch (JsonException ex)
             {
-                logger.LogError($"Failed to deserialize OpenAI response: {ex.Message}");
-                logger.LogError($"Response Content: {responseContent}");
+                logger.LogError("Failed to deserialize OpenAI response: {exMessage}", ex.Message);
+                logger.LogError("Response Content: {responseContent}", responseContent);
                 return "Error: Failed to process OpenAI response.";
             }
 
         }
     }
+
     public class OpenAIResponse
     {
         public required List<OpenAIChoice> Choices { get; set; }
@@ -91,13 +114,13 @@ namespace intelliBot.Controllers
     public class OpenAIChoice
     {
         public required OpenAIMessage Message { get; set; }
-        public string? FinishReason { get; set; } // Optional property from API
+        public string? FinishReason { get; set; }
     }
 
     public class OpenAIMessage
     {
         public required string Content { get; set; }
-        public string? Role { get; set; } // Optional for safety
+        public string? Role { get; set; }
     }
 
     }

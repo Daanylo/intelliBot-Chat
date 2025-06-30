@@ -1,52 +1,41 @@
 ﻿@{
-    Layout = null;
+    Layout = @"~/Views/Shared/_Layout.cshtml";
 }
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>intelliBot</title>
-    <link rel="icon" type="image/x-icon" href="~/resources/intelliguide_icon.ico">
+<head>    
     <script src="~/js/conversation.js" defer></script>
     <link rel="stylesheet" href="~/css/conversation.css">
-    <link rel="stylesheet" href="~/css/styles.css">
-    <link rel="stylesheet" href="https://use.typekit.net/biq6ldp.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
 </head>
-<body>
-    <div class="page-container">
-        <audio id="audio"></audio>
-        <div class="navbar">
-            <div class="title">
-                <h1>CONVERSATION</h1>
-            </div>
-            <div class="help">
-                <p>Help</p>
-                <i class="fa-solid fa-circle-question"></i>
-            </div>
-        </div>
-        <div class="content-wrapper">
-            <div class="conversation-wrapper">
-                <div class="conversation-container">
-                </div>
-            </div>
-            <div class="gui-bar">
-                <div class="microphone-container">
-                    <button class="microphone-button" id="microphone-button">
-                        <i class="fa-solid fa-microphone"></i>
-                    </button>
-                    <div class="microphone-backdrop" id="microphone-backdrop">
-                    </div>
-                </div>
-                <button id="submit">
-                    <i class="fa-solid fa-paper-plane"></i>
-                </button>
-            </div>
-            <button type="button" id="finish-conversation">Beëindig gesprek</button>
+
+<audio id="audio"></audio>
+<audio id="start-sound"></audio>
+    <div class="conversation-wrapper">
+        <div class="conversation-container">
         </div>
     </div>
-</body>
-</html>
+    <div class="gui-bar">
+        <textarea type="text" id="input" placeholder="Typ een bericht..."></textarea>
+
+        <div id="finish-conversation" class="finish-conversation">
+            <p id="finish-conversation-text">Finish conversation</p>
+        </div>
+        <div class="gui-buttons">
+            <div class="microphone-container" id="microphone-container">
+                <button class="microphone-button" id="microphone-button">
+                    <i class="fa-solid fa-microphone"></i>
+                </button>
+                <div class="microphone-backdrop" id="microphone-backdrop">
+                </div>
+            </div>
+            <button id="submit">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </div>
+
+
+    </div>
+
+</div>
+
+
 

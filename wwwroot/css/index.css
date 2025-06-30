@@ -1,8 +1,4 @@
-﻿.content-wrapper.language-select {
-    margin-top: 50px;
-}
-
-.logo-animation-container {
+﻿.logo-animation-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,17 +13,6 @@
     animation-delay: 2s;
 }
 
-.navbar .help,
-.navbar .title {
-    opacity: 0;
-}
-
-.start-animations .navbar .help,
-.start-animations .navbar .title {
-    animation: appear 1s cubic-bezier(0.75, 0, 0.25, 1) forwards;
-    animation-delay: 2.2s;
-}
-
 .navbar.animate {
     height: 100vh;
     position: absolute;
@@ -39,16 +24,6 @@
 .start-animations .navbar.animate {
     animation: background-move-up 1s cubic-bezier(0.75, 0, 0.25, 1) forwards;
     animation-delay: 2s;
-}
-
-.start-button {
-    position: absolute;
-    z-index: 100;
-    align-self: center;
-}
-
-.start-button:hover {
-    cursor: pointer;
 }
 
 @keyframes appear {
@@ -93,6 +68,7 @@
 .letters h1 {
     opacity: 0;
     font-weight: bold;
+    font-family: 'All Round Gothic', sans-serif;
     font-size: 4em;
     color: white;
     transform: translateY(20px);
@@ -198,6 +174,34 @@
     justify-content: center;
     align-items: start;
     transition: 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+    max-width: 400px;
+}
+
+.language-select {
+    height: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    position: relative;
+    border-bottom: #3a3a3a3c 1px solid;
+    background-color: whitesmoke;
+}
+
+.languages-list {
+    position: absolute;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    gap: 10px;
+    top: 50px;
+    z-index: 100;
+    background-color: whitesmoke;
+    width: 100%;
+    border-radius: 0px 0px 20px 20px;
+    max-height: 0px;
+    transition: .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    border-radius: 0px 0px 10px 10px;
 }
 
 .language {
@@ -206,42 +210,30 @@
     cursor: pointer;
     color: black;
     width: 100%;
-    border-radius: 10px;
     gap: 10px;
     font-weight: bold;
     overflow: hidden;
     background-color: transparent;
     transition: background-color 2s;
+    box-sizing: border-box;
+    padding: 10px;
 }
 
-.language.active {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    color: black;
-    background: linear-gradient(to right, #5468ff1f 50%, transparent 50%);
-    background-size: 200% 100%;
-    background-position: 100% 0;
-    animation: select-language .6s forwards;
-    gap: 10px;
-    font-weight: bold;
-    overflow: hidden;
+.language.cover i {
+    margin-left: auto;
+    margin-right: 10px;
+    transition: .5s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-@keyframes select-language {
-    0% {
-        background-position: 100% 0;
-    }
-    100% {
-        background-position: 0 0;
-    }
+.languages-list .language.current {
+    display: none;
 }
 
 .language img {
-    width: 75px;
-    height: 50px;
+    width: 40px;
+    height: 30px;
     object-fit: fill;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .error-message {
@@ -291,21 +283,33 @@
 
 #submit-language {
     width: 100%;
-    background: radial-gradient(100% 100% at 100% 0%, #bbbbbb 0%, #6b6b6b 100%);
-    box-shadow: 0px 0.1em 0.2em rgba(61, 61, 61, 0.4), 0px 0.4em 0.7em -0.1em rgba(59, 59, 59, 0.3), inset 0px -0.2em 0px #3a3a3a;
-}
-
-#submit-language:active {
-    box-shadow: inset 0px 0.1em 0.6em #3a3a3a;
-    transform: translateY(0em);
-}
-
-#submit-language.active {
     background: radial-gradient( 100% 100% at 100% 0%, #89E5FF 0%, #5468FF 100% );
     box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%), 0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.2em 0px #3c4fe0;
 }
 
-#submit-language.active:active {
+#submit-language:active {
     box-shadow: inset 0px 0.1em 0.6em #3c4fe0;
     transform: translateY(0em);
+}
+
+.fa-solid.fa-qrcode.qr-button {
+    display: none;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+.qr-container {
+    background-color: white;
+    display: none;
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    border-top: #3a3a3a3c 1px solid;
+    padding-top: 20px;
+}
+
+.qrcode {
+    align-self: center;
+    height: 128px;
 }

@@ -4,7 +4,7 @@
     flex-direction: column;
     padding: 20px;
     gap: 20px;
-    width: 500px;
+    max-width: 500px;
     align-items: start;
     background-color: white;
     border-radius: 20PX;
@@ -60,16 +60,18 @@
     display: none;
 }
 
-.radio~span {
-    font-size: 3rem;
+.radio~img {
+    width: 50px;
+    height: 50px;
     filter: grayscale(100);
     cursor: pointer;
     transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.radio:checked~span {
+.radio:checked~img {
     filter: grayscale(0);
-    font-size: 4rem;
+    width: 70px;
+    height: 70px;
 }
 
 .form-buttons {
@@ -101,4 +103,15 @@
 
 #close-grattitude {
     align-self: flex-end;
+}
+
+.submit-review:disabled:active {
+    box-shadow: inset 0px 0.1em 0.6em #858585;
+    transform: translateY(0em);
+}
+
+.submit-review:disabled {
+    background: radial-gradient( 100% 100% at 100% 0%, #e6e6e6 0%, #858585 100% );
+    box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%), 0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.2em 0px #3b3b3b;
+    cursor: not-allowed;
 }

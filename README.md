@@ -309,3 +309,7 @@ This project was created for educational purposes at Fontys ICT Eindhoven.
    - Manage events               - User management          - Rate experience
    - Review analytics            - Context data             - Request help
 ```
+
+<div align="center">
+    <img src="https://mmmlabel.tech/wp-content/themes/mmmlabel/icons/color/128px/cyborg/cyborg.svg" alt="Made together with genAI" height="100">
+</div>
